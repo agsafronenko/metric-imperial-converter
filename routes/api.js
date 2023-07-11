@@ -9,16 +9,22 @@ module.exports = function (app) {
     let input = req.query.input;
     let initNum = convertHandler.getNum(input);
     let initUnit = convertHandler.getUnit(input);
-    if (!initNum && !initUnit) {
-      res.send("Invalid number and unit");
-    } else if (!initNum) {
-      res.send("Invalid number");
-    } else if (!initUnit) {
-      res.send("Invalid unit");
-    }
     let returnNum = convertHandler.convert(initNum, initUnit);
     let returnUnit = convertHandler.getReturnUnit(initUnit);
-    // let spellOutUnit = convertHandler.spellOutUnit(unit);
-    let toString = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
+    console.log("initNum", initNum, "initUnit", initUnit, "returnNum", returnNum, "returnUnit", returnUnit);
+    let spellOutUnit = convertHandler.spellOutUnit(initNum, initUnit, returnNum, returnUnit);
+    let toString = convertHandler.getString(initNum, initUnit, returnNum, returnUnit, spellOutUnit);
+    console.log("hiiiiii");
+    // res.send(spellOutUnit);
+    res.send(toString);
+    // if (!initNum && !initUnit) {
+    //   res.send("invalid number and unit");
+    // } else if (!initNum) {
+    //   res.send("invalid number");
+    // } else if (!initUnit) {
+    //   res.send("invalid unit");
+    // } else {
+    //   res.send(toString);
+    // }
   });
 };
